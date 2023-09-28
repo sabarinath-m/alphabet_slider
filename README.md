@@ -1,39 +1,32 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<?code-excerpt path-base="example"?>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+# alphabet_slider
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages. This package provides a widget that lists all the alphabets vertically. Users can select an alphabet by either sliding on top of the list or clicking on an alphabet.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+To use this plugin, add `alphabet_slider` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
 
+### Example
+
+<?code-excerpt "lib/basic.dart (basic-example)"?>
 ```dart
-const like = 'sample';
+import 'package:flutter/material.dart';
+import 'package:alphabet_slider/alphabet_slider.dart';
+
+void main() => runApp(
+      const MaterialApp(
+        home: Material(
+          child: AlphabetSlider(onLetterSelect: _onLetterSelect),
+        ),
+      ),
+    );
+
+void _onLetterSelect(String letter) {
+// Jump to contact starting with 'letter'
+}
 ```
 
-## Additional information
+See the example app for more complex examples.
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.

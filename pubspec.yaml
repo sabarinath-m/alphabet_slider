@@ -1,7 +1,6 @@
 name: alphabet_slider
 description: A new Flutter package project.
-version: 0.0.1
-homepage:
+version: 1.0.0
 
 environment:
   sdk: '>=2.19.0 <3.0.0'

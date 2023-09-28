@@ -1,7 +1,31 @@
 library alphabet_slider;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:alphabet_slider/alphabet_slider_view.dart';
+import 'package:flutter/material.dart';
+
+class AlphabetSlider extends StatelessWidget {
+  AlphabetSlider({
+    super.key,
+    required this.onLetterSelect,
+    this.fontSize = 10,
+    this.textColor = Colors.green,
+    this.selectedTextColor = Colors.black,
+    this.verticalLetterPadding = 2,
+  });
+  Function(String letter) onLetterSelect;
+  final Color textColor;
+  final Color selectedTextColor;
+  final double verticalLetterPadding;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlphabetSliderView(
+      selectLetterCallBack: onLetterSelect,
+      selectedTextColor: selectedTextColor,
+      textColor: textColor,
+      verticalLetterPadding: verticalLetterPadding,
+      fontSize: fontSize,
+    );
+  }
 }
