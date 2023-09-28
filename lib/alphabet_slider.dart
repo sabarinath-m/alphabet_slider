@@ -4,7 +4,7 @@ import 'package:alphabet_slider/alphabet_slider_view.dart';
 import 'package:flutter/material.dart';
 
 class AlphabetSlider extends StatelessWidget {
-  AlphabetSlider({
+  const AlphabetSlider({
     super.key,
     required this.onLetterSelect,
     this.fontSize = 10,
@@ -12,7 +12,7 @@ class AlphabetSlider extends StatelessWidget {
     this.selectedTextColor = Colors.black,
     this.verticalLetterPadding = 2,
   });
-  Function(String letter) onLetterSelect;
+  final Function(String letter) onLetterSelect;
   final Color textColor;
   final Color selectedTextColor;
   final double verticalLetterPadding;

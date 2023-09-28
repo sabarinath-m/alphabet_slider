@@ -1,3 +1,4 @@
 ## 1.0.0
 
-* TODO: Describe initial release.
+* First release of `alphabet_slider`
+* Create and expose AlphabetSlider widget

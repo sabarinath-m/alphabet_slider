@@ -72,7 +72,7 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _getColumnItem(String letter, int index) {
+    Widget getColumnItem(String letter, int index) {
       return GestureDetector(
         onTap: () => onLetterChange(letter, widget.selectLetterCallBack),
         child: Container(
@@ -108,7 +108,7 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
         padding: const EdgeInsets.only(right: 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: letters.mapIndexed(_getColumnItem).toList(),
+          children: letters.mapIndexed(getColumnItem).toList(),
         ),
       ),
     );
