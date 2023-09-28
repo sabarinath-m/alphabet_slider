@@ -2,9 +2,9 @@
 
 # alphabet_slider
 
-![alt text](./demo.gif "Logo Title Text 1")
-
 A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages. This package provides a widget that lists all the alphabets vertically. Users can select an alphabet by either sliding on top of the list or clicking on an alphabet.
+
+<img src="./demo.gif" width="300" height="500" />
 
 ## Usage
 
