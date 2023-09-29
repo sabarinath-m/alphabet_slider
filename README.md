@@ -16,19 +16,27 @@ To use this plugin, add `alphabet_slider` as a [dependency in your pubspec.yaml 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:alphabet_slider/alphabet_slider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-void main() => runApp(
-      const MaterialApp(
-        home: Material(
-          child: AlphabetSlider(onLetterSelect: _onLetterSelect),
-        ),
-      ),
-    );
+Stack(
+  alignment: Alignment.centerRight,
+  children: [
+    ListView.builder(
+      itemCount: 50,
+      itemBuilder: _getScrollItemBuilder,
+    ),
+    AlphabetSlider(
+      onLetterSelect: _onLetterSelect,
+      textColor: Colors.green,
+      fontSize: 12,
+    )
+  ],
+),
 
 void _onLetterSelect(String letter) {
 // Jump to contact starting with 'letter'
 }
 ```
 
-See the example app for more complex examples.
+See the example app for a complex example.
 

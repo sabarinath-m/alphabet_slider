@@ -7,6 +7,7 @@ extension IndexedIterable<E> on Iterable<E> {
   }
 }
 
+/// AlphabetSliderView Widget
 class AlphabetSliderView extends StatefulWidget {
   /// Constructor
   const AlphabetSliderView({
@@ -20,9 +21,17 @@ class AlphabetSliderView extends StatefulWidget {
 
   /// update currentSelectedLetter
   final void Function(String alphabet) selectLetterCallBack;
-  final Color? textColor;
-  final Color? selectedTextColor;
+
+  /// alphabet color
+  final Color textColor;
+
+  /// selected alphabet color
+  final Color selectedTextColor;
+
+  /// vertical padding
   final double verticalLetterPadding;
+
+  /// alphabet font size
   final double fontSize;
 
   @override
@@ -35,6 +44,7 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
 
   String currentSelectedLetter = '';
 
+  /// Called on letter change
   void onLetterChange(
     String letter,
     void Function(String alphabet) letterChangeCallBack,
@@ -45,6 +55,7 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
     letterChangeCallBack(letter);
   }
 
+  /// Method called during drag event
   void onVerticalDragUpdate(
     BuildContext context,
     DragUpdateDetails dragUpdateDetails,
@@ -55,7 +66,7 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
       final height =
           renderBox.globalToLocal(dragUpdateDetails.globalPosition).dy;
       final letterHeight = widget.fontSize + 2 * (widget.verticalLetterPadding);
-      
+
       var nextLetterIndex = (height / letterHeight).floor();
 
       /// If nextLetterIndex is not within the range of indexes,
@@ -72,7 +83,8 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
 
   @override
   Widget build(BuildContext context) {
-    Widget getColumnItem(String letter, int index) {
+    /// LetterWidget
+    Widget getLetterWidget(String letter, int index) {
       return GestureDetector(
         onTap: () => onLetterChange(letter, widget.selectLetterCallBack),
         child: Container(
@@ -104,11 +116,13 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
           widget.selectLetterCallBack,
         );
       },
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(right: 4),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: letters.mapIndexed(getColumnItem).toList(),
+      child: SizedBox(
+        width: widget.fontSize + 10,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: letters.mapIndexed(getLetterWidget).toList(),
+          ),
         ),
       ),
     );

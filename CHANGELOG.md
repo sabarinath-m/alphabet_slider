@@ -2,3 +2,11 @@
 
 * First release of `alphabet_slider`
 * Create and expose AlphabetSlider widget
+
+## 1.0.1
+
+* Modify README
+* Add example app
+* Modify description
+* Format code
+* Add dartdoc comments
