@@ -4,7 +4,7 @@
 
 A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages. This package provides a widget that lists all the alphabets vertically. Users can select an alphabet by either sliding on top of the list or clicking on an alphabet.
 
-<img src="./demo.gif" width="300" height="500" />
+<img src="https://github.com/sabarinath-m/alphabet_slider/blob/main/demo.gif?raw=true" width="300" height="500" />
 
 ## Usage
 

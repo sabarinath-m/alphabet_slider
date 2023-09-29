@@ -10,3 +10,8 @@
 * Modify description
 * Format code
 * Add dartdoc comments
+
+## 1.0.2
+
+* Modify gif url in README
+* Update description

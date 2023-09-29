@@ -1,6 +1,6 @@
 name: alphabet_slider
-description: A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages. This package provides a widget that lists all the alphabets vertically. Users can select an alphabet by either sliding on top of the list or clicking on an alphabet. Also we can pass fontSize, textColor, selectedTextColor onLetterSelect callback to the widget. Use this widget with a Stack widget and align based on your UI requirement.
-version: 1.0.1
+description: A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages.
+version: 1.0.2
 repository: https://github.com/sabarinath-m/alphabet_slider.git
 
 environment:
