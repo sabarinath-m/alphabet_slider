@@ -14,14 +14,19 @@ class AlphabetSlider extends StatelessWidget {
     this.selectedTextColor = Colors.black,
     this.verticalLetterPadding = 2,
   });
+
   /// Callback for selecting a letter
   final Function(String letter) onLetterSelect;
+
   /// alphabet color
   final Color textColor;
+
   /// selected alphabet color
   final Color selectedTextColor;
+
   /// vertical padding
   final double verticalLetterPadding;
+
   /// alphabet font size
   final double fontSize;
 
