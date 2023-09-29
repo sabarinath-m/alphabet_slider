@@ -15,3 +15,7 @@
 
 * Modify gif url in README
 * Update description
+
+## 1.0.3
+
+* Modify README

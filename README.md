@@ -16,7 +16,6 @@ To use this plugin, add `alphabet_slider` as a [dependency in your pubspec.yaml 
 ```dart
 import 'package:flutter/material.dart';
 import 'package:alphabet_slider/alphabet_slider.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 Stack(
   alignment: Alignment.centerRight,
