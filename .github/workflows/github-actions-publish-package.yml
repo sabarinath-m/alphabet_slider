@@ -1,6 +1,6 @@
 name: Publish package
-run-name: Publish package ${{ github.actor }}
-on: 
+run-name: Publish package
+on:
   workflow_dispatch:
     inputs:
       versionToUpdate:
@@ -30,7 +30,7 @@ jobs:
          fi
          export VERSION=$(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
          echo $VERSION
-         export UPDATE_CHOICE = ${{ github.event.inputs.versionToUpdate }}
+         export UPDATE_CHOICE=${{ github.event.inputs.versionToUpdate }}
          export MAJOR=$(echo $VERSION | cut -d. -f1)
          export MINOR=$(echo $VERSION | cut -d. -f2)
          export PATCH=$(echo $VERSION | cut -d"+" -f1 | cut -d"." -f3)
