@@ -1,5 +1,5 @@
 name: Publish package
-run-name: Publish package v ${{ github.actor }}
+run-name: Publish package ${{ github.actor }}
 on: 
   workflow_dispatch:
     inputs:
@@ -26,7 +26,6 @@ jobs:
           echo $BRANCH
           exit 1
          fi
-         |
          export VERSION=$(sed -n "s/^\version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p" pubspec.yaml)
          echo $VERSION
          export UPDATE_CHOICE = ${{ github.event.inputs.versionToUpdate }}
@@ -38,7 +37,6 @@ jobs:
          if [[ "$UPDATE_CHOICE" == "Major" ]]; then export NEW_TAG=$((MAJOR + 1)).0.0+$NEW_BUILD_NUMBER; fi
          if [[ "$UPDATE_CHOICE" == "Minor" ]]; then export NEW_TAG=$MAJOR.$((MINOR + 1)).0+$NEW_BUILD_NUMBER; fi
          if [[ "$UPDATE_CHOICE" == "Patch" ]]; then export NEW_TAG=$MAJOR.$MINOR.$((PATCH + 1))+$NEW_BUILD_NUMBER; fi
-         |
          sed -i "s/version: $VERSION/version: $NEW_TAG/g" pubspec.yaml
          git add pubspec.yaml
          git commit -m "Version bumped to $NEW_TAG"
