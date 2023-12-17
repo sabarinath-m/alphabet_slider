@@ -1,5 +1,5 @@
 name: Publish package
-run-name: Publish package v ${{ github.actor }
+run-name: Publish package v ${{ github.actor }}
 on: 
   workflow_dispatch:
     inputs:
