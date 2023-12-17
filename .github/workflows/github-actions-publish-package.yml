@@ -18,6 +18,8 @@ jobs:
       - name: Get branch names.
         id: branch-names
         uses: tj-actions/branch-names@v8
+      - name: Checkout code
+        uses: actions/checkout@v4
       - run: |
          export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
@@ -26,7 +28,7 @@ jobs:
           echo $BRANCH
           exit 1
          fi
-         export VERSION=$(sed -n "s/^\version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p" pubspec.yaml)
+         export VERSION=$(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
          echo $VERSION
          export UPDATE_CHOICE = ${{ github.event.inputs.versionToUpdate }}
          export MAJOR=$(echo $VERSION | cut -d. -f1)
