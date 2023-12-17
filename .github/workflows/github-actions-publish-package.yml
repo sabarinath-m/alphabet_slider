@@ -12,7 +12,7 @@ on:
           - "Minor"
           - "Patch"
 jobs:
-  Update-version-and-tag:
+  update-version-and-tag:
     runs-on: ubuntu-latest
     steps:
 
