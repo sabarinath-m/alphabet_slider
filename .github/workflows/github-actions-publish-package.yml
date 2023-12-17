@@ -20,6 +20,12 @@ jobs:
         uses: tj-actions/branch-names@v8
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Debug
+        run: |
+         echo "GitHub context: $GITHUB_CONTEXT"
+         git config --list
+        env:
+         GITHUB_CONTEXT: ${{ toJson(github) }}
       - run: |
          export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
