@@ -18,8 +18,6 @@ jobs:
       - name: Get branch names.
         id: branch-names
         uses: tj-actions/branch-names@v8
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout code
         uses: actions/checkout@v4
       - run: |
@@ -36,7 +34,8 @@ jobs:
          export MAJOR=$(echo $VERSION | cut -d. -f1)
          export MINOR=$(echo $VERSION | cut -d. -f2)
          export PATCH=$(echo $VERSION | cut -d"+" -f1 | cut -d"." -f3)
-         export BUILD_NUMBER=$(echo $VERSION | cut -d"+" -f2)
+         export BUILD_NUMBER=$(cat pubspec.yaml | grep "build_number:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+         echo "Build Number: $BUILD_NUMBER"
          export NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 1))
          if [[ "$UPDATE_CHOICE" == "Major" ]]; then export NEW_TAG=$((MAJOR + 1)).0.0+$NEW_BUILD_NUMBER; fi
          if [[ "$UPDATE_CHOICE" == "Minor" ]]; then export NEW_TAG=$MAJOR.$((MINOR + 1)).0+$NEW_BUILD_NUMBER; fi
@@ -47,6 +46,8 @@ jobs:
          git tag $NEW_TAG
          git push --tags
          git push origin $BRANCH
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
          
           
