@@ -15,9 +15,11 @@ jobs:
   update-version-and-tag:
     runs-on: ubuntu-latest
     steps:
-
+      - name: Get branch names.
+        id: branch-names
+        uses: tj-actions/branch-names@v8
       - run: |
-         export BRANCH=${{ github.ref }}
+         export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
          if [[ "$BRANCH" != "main" ]]; then
           echo "Tagging cannot be done on branch other than main"
