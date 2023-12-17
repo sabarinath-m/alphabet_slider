@@ -3,6 +3,7 @@ run-name: Publish Package
 on:
   release: 
     types: [published, created, edited]
+    on: "main"
 jobs:
   build:
     runs-on: ubuntu-latest
