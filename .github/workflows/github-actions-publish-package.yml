@@ -20,13 +20,9 @@ jobs:
         uses: tj-actions/branch-names@v8
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Debug
-        run: |
-         echo "GitHub context: $GITHUB_CONTEXT"
-         git config --list
-        env:
-         GITHUB_CONTEXT: ${{ toJson(github) }}
       - run: |
+         git config user.name 'github-actions[bot]'
+         git config user.email 'github-actions[bot]@users.noreply.github.com'
          export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
          if [[ "$BRANCH" != "main" ]]; then
@@ -40,20 +36,15 @@ jobs:
          export MAJOR=$(echo $VERSION | cut -d. -f1)
          export MINOR=$(echo $VERSION | cut -d. -f2)
          export PATCH=$(echo $VERSION | cut -d"+" -f1 | cut -d"." -f3)
-         export BUILD_NUMBER=$(cat pubspec.yaml | grep "build_number:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
-         echo "Build Number: $BUILD_NUMBER"
-         export NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 1))
-         if [[ "$UPDATE_CHOICE" == "Major" ]]; then export NEW_TAG=$((MAJOR + 1)).0.0+$NEW_BUILD_NUMBER; fi
-         if [[ "$UPDATE_CHOICE" == "Minor" ]]; then export NEW_TAG=$MAJOR.$((MINOR + 1)).0+$NEW_BUILD_NUMBER; fi
-         if [[ "$UPDATE_CHOICE" == "Patch" ]]; then export NEW_TAG=$MAJOR.$MINOR.$((PATCH + 1))+$NEW_BUILD_NUMBER; fi
+         if [[ "$UPDATE_CHOICE" == "Major" ]]; then export NEW_TAG=$((MAJOR + 1)).0.0; fi
+         if [[ "$UPDATE_CHOICE" == "Minor" ]]; then export NEW_TAG=$MAJOR.$((MINOR + 1)).0; fi
+         if [[ "$UPDATE_CHOICE" == "Patch" ]]; then export NEW_TAG=$MAJOR.$MINOR.$((PATCH + 1)); fi
          sed -i "s/version: $VERSION/version: $NEW_TAG/g" pubspec.yaml
          git add pubspec.yaml
          git commit -m "Version bumped to $NEW_TAG"
          git tag $NEW_TAG
          git push --tags
          git push origin $BRANCH
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
          
           
