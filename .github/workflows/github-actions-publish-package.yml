@@ -1,0 +1,58 @@
+name: Publish package
+run-name: Publish package v ${{ github.actor }
+on: 
+  workflow_dispatch:
+    inputs:
+      versionToUpdate:
+        required: true
+        description: Choose version to update
+        type: choice
+        options:
+          - "Major"
+          - "Minor"
+          - "Patch"
+jobs:
+  Update-version-and-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: |
+         export BRANCH = ${{ github.ref }}
+         echo "branch: $BRANCH"
+         if [[ "$BRANCH" != "main" ]]; then
+          echo "Tagging cannot be done on branch other than main"
+          echo $BRANCH
+          exit 1
+         fi
+         |
+         export VERSION=$(sed -n "s/^\version:[[:space:]]*\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p" pubspec.yaml)
+         echo $VERSION
+         export UPDATE_CHOICE = ${{ github.event.inputs.versionToUpdate }}
+         export MAJOR=$(echo $VERSION | cut -d. -f1)
+         export MINOR=$(echo $VERSION | cut -d. -f2)
+         export PATCH=$(echo $VERSION | cut -d"+" -f1 | cut -d"." -f3)
+         export BUILD_NUMBER=$(echo $VERSION | cut -d"+" -f2)
+         export NEW_BUILD_NUMBER=$(($BUILD_NUMBER + 1))
+         if [[ "$UPDATE_CHOICE" == "Major" ]]; then export NEW_TAG=$((MAJOR + 1)).0.0+$NEW_BUILD_NUMBER; fi
+         if [[ "$UPDATE_CHOICE" == "Minor" ]]; then export NEW_TAG=$MAJOR.$((MINOR + 1)).0+$NEW_BUILD_NUMBER; fi
+         if [[ "$UPDATE_CHOICE" == "Patch" ]]; then export NEW_TAG=$MAJOR.$MINOR.$((PATCH + 1))+$NEW_BUILD_NUMBER; fi
+         |
+         sed -i "s/version: $VERSION/version: $NEW_TAG/g" pubspec.yaml
+         git add pubspec.yaml
+         git commit -m "Version bumped to $NEW_TAG"
+         git tag $NEW_TAG
+         git push --tags
+         git push origin $BRANCH
+
+         
+          
