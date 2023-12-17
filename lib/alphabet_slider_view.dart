@@ -96,8 +96,8 @@ class _AlphabetSliderViewState extends State<AlphabetSliderView> {
               letter,
               style: TextStyle(
                 color: currentSelectedLetter == letter
-                    ? Colors.black
-                    : Colors.green,
+                    ? widget.selectedTextColor 
+                    : widget.textColor,
                 fontSize: widget.fontSize,
                 fontWeight: FontWeight.w500,
                 height: 0,

@@ -19,3 +19,7 @@
 ## 1.0.3
 
 * Modify README
+
+## 1.0.4
+
+* Take text colors from props

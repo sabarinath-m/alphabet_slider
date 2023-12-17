@@ -1,6 +1,6 @@
 name: alphabet_slider
 description: A Flutter plugin for an Alphabet slider, commonly used in phone contact listing pages.
-version: 1.0.3
+version: 1.0.4
 repository: https://github.com/sabarinath-m/alphabet_slider.git
 
 environment:
