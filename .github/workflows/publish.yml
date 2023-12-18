@@ -1,6 +1,8 @@
 name: Publish Package
 run-name: Publish Package
 on: workflow_dispatch
+env:
+  tag: $(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: $(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+          tag_name: ${{ env.tag }}
           release_name: Release ${{ steps.branch-names.outputs.current_branch }}
           draft: false
           prerelease: false
