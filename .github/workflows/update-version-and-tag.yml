@@ -46,7 +46,7 @@ jobs:
          sed -i "s/version: $VERSION/version: $NEW_TAG/g" pubspec.yaml
          export CHANGE_LOG="${{ github.event.inputs.changeLog }}"
          echo "Adding change log $CHANGE_LOG"
-         echo -e "## ${NEW_TAG}\n*${CHANGE_LOG}\n\n" >> CHANGELOG.md
+         echo -e "## ${NEW_TAG}\n* ${CHANGE_LOG}\n\n" >> CHANGELOG.md
          git add CHANGELOG.md
          git add pubspec.yaml
          git commit -m "Version bumped to $NEW_TAG"
