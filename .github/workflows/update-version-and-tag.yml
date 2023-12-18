@@ -27,6 +27,8 @@ jobs:
         uses: tj-actions/branch-names@v8
       - name: Checkout code
         uses: actions/checkout@v4
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT_SECRET }}
       - run: |
          export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
