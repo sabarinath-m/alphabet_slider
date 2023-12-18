@@ -1,9 +1,9 @@
 name: Publish Package
 run-name: Publish Package
 on:
-  release: 
+  release:
     types: [published, created, edited]
-    on: "main"
+    on: main
 jobs:
   build:
     runs-on: ubuntu-latest
