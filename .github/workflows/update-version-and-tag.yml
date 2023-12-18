@@ -27,9 +27,9 @@ jobs:
         uses: tj-actions/branch-names@v8
       - name: Checkout code
         uses: actions/checkout@v4
-        env:
-            GITHUB_TOKEN: ${{ secrets.PAT_SECRET }}
       - run: |
+         git config user.name '${{ secrets.WORKFLOW_USERNAME }}'
+         git config user.email '${{ secrets.WORKFLOW_EMAIL }}'
          export BRANCH=${{ steps.branch-names.outputs.current_branch }}
          echo "branch: $BRANCH"
          if [[ "$BRANCH" != "main" ]]; then
