@@ -45,4 +45,4 @@ jobs:
           draft: false
           prerelease: false
       - name: Publish
-        run: flutter pub publish
+        run: flutter pub publish --force
