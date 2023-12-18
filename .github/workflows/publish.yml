@@ -26,14 +26,16 @@ jobs:
           sh ./pub_login.sh
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Get branch names.
+        id: branch-names
+        uses: tj-actions/branch-names@v8
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: Release ${{ steps.branch-names.outputs.current_branch }}
           draft: false
           prerelease: false
       - name: Check Publish Warnings
