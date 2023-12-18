@@ -24,3 +24,7 @@
 
 * Take text colors from props
 
+## 1.0.5
+* Add workflows
+
+
