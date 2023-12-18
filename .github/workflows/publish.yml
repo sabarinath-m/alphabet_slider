@@ -1,8 +1,6 @@
 name: Publish Package
 run-name: Publish Package
 on: workflow_dispatch
-env:
-  tag: echo $(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,13 +29,16 @@ jobs:
       - name: Get branch names.
         id: branch-names
         uses: tj-actions/branch-names@v8
+      - name: Retrieve version
+        run: |
+          echo ::set-env name=TAG_NAME::$(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.tag }}
+          tag_name: ${{ env.TAG_NAME }}
           release_name: Release ${{ steps.branch-names.outputs.current_branch }}
           draft: false
           prerelease: false
