@@ -49,3 +49,5 @@ jobs:
           prerelease: false
       - name: Publish
         run: flutter pub publish --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
