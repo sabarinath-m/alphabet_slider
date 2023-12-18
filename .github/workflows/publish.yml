@@ -31,14 +31,14 @@ jobs:
         uses: tj-actions/branch-names@v8
       - name: Retrieve version
         run: |
-          echo ::set-env name=TAG_NAME::$(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+          echo "{TAG_NAME}={$(cat pubspec.yaml | grep "version:" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')}" >> $GITHUB_STATE
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.TAG_NAME }}
+          tag_name: ${{ TAG_NAME }}
           release_name: Release ${{ steps.branch-names.outputs.current_branch }}
           draft: false
           prerelease: false
