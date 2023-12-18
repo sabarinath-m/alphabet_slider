@@ -23,3 +23,8 @@
 ## 1.0.4
 
 * Take text colors from props
+## Version 1.0.5
+
+Add
+
+
