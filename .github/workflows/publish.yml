@@ -24,6 +24,8 @@ jobs:
           PUB_DEV_PUBLISH_EXPIRATION: ${{ secrets.PUB_DEV_PUBLISH_EXPIRATION }}
         run: |
           sh ./pub_login.sh
+      - name: Check Publish Warnings
+        run: flutter pub publish --dry-run
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Get branch names.
@@ -39,8 +41,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: $TAG_NAME
-          release_name: Release ${{ steps.branch-names.outputs.current_branch }}
+          release_name: Release $TAG_NAME
           draft: false
           prerelease: false
-      - name: Check Publish Warnings
-        run: flutter pub publish --dry-run
+      - name: Publish
+        run: flutter pub publish
