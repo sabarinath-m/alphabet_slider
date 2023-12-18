@@ -23,11 +23,3 @@
 ## 1.0.4
 
 * Take text colors from props
-
-## 1.0.5
-
-* Add publisher
-
-## 1.0.6
-
-* Add Workflow
